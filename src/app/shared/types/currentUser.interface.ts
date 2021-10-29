@@ -1,6 +1,7 @@
 export interface CurrentUserInterface {
   id: number
-  email: string
+  username: string
+  email: string | null
   createdAt: string
   updatedAt: string
   bio: string | null

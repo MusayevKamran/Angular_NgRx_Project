@@ -2,19 +2,21 @@ import { Component, OnInit } from "@angular/core"
 import { FormBuilder, FormGroup, Validators } from "@angular/forms"
 import { select, Store } from "@ngrx/store";
 import { Observable } from "rxjs";
-import { CurrentUserInterface } from "src/app/shared/types/currentUser.interface";
+import { BackendErrorsInterface } from "src/app/shared/types/backendErrors.interface";
 import { AuthService } from "../../services/auth.service";
 import { registerAction } from "../../store/actions/register.action";
-import { isSubmittingSelector } from "../../store/selector";
+import { isSubmittingSelector, validationErrorSelector } from "../../store/selector";
+import { RegisterRequestInterface } from "../../types/registerRequest.interface";
 
 @Component({
-  selector: 'app',
+  selector: 'app-register',
   templateUrl: './register.component.html',
   styleUrls: ['./register.component.scss']
 })
 export class RegisterComponent implements OnInit {
   form: FormGroup;
   isSubmitting$: Observable<boolean>
+  backendErrors$: Observable<BackendErrorsInterface | null>
 
   constructor(private fb: FormBuilder, private store: Store, private authService: AuthService) { }
 
@@ -25,7 +27,7 @@ export class RegisterComponent implements OnInit {
 
   initializeValues(): void {
     this.isSubmitting$ = this.store.pipe(select(isSubmittingSelector))
-    console.log('isSubbmiting$', this.isSubmitting$);
+    this.backendErrors$ = this.store.pipe(select(validationErrorSelector))
   }
 
   initializeForm(): void {
@@ -37,11 +39,9 @@ export class RegisterComponent implements OnInit {
   }
 
   onSubmit(): void {
-    console.log(this.form.valid);
-    this.store.dispatch(registerAction(this.form.value))
-    this.authService.register(this.form.value)
-      .subscribe((currentUser: CurrentUserInterface) => {
-        console.log(currentUser)
-      })
+    const request: RegisterRequestInterface = {
+      user: this.form.value
+    }
+    this.store.dispatch(registerAction({ request }))
   }
 }
