@@ -9,4 +9,4 @@ import { ErrorMesageComponent } from "./components/errorMesage.component";
     ErrorMesageComponent
   ]
 })
-export class BannerModule { }
+export class ErrorMesageModule { }

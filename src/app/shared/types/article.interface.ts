@@ -10,5 +10,5 @@ export interface ArticleInterface {
   favorited: boolean
   favoritesCount: number
   slug: string
-  togList: string[]
+  tagList: string[]
 }
