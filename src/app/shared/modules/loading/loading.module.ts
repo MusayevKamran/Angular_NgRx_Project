@@ -5,8 +5,6 @@ import { LoadingComponent } from "./components/loading.component";
 @NgModule({
   imports: [CommonModule],
   exports: [LoadingComponent],
-  declarations: [
-    LoadingComponent
-  ]
+  declarations: [LoadingComponent]
 })
 export class LoadingModule { }

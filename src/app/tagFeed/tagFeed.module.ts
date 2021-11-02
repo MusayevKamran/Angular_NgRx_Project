@@ -5,12 +5,12 @@ import { BannerModule } from "../shared/modules/banner/banner.module";
 import { FeedModule } from "../shared/modules/feed/feed.module";
 import { FeedTogglerModule } from "../shared/modules/feedToggler/feedToggler.module";
 import { PopularTagsModule } from "../shared/modules/popularTags/popularTags.module";
-import { GlobalFeedComponent } from "./components/globalFeed.component";
+import { TagFeedComponent } from "./components/tagFeed.component";
 
 const routes = [
   {
-    path: '',
-    component: GlobalFeedComponent
+    path: 'tags/:slug',
+    component: TagFeedComponent
   }
 ]
 
@@ -24,8 +24,8 @@ const routes = [
     FeedTogglerModule
   ],
   declarations: [
-    GlobalFeedComponent,
+    TagFeedComponent,
   ]
 })
-export class GlobalFeedModule { }
+export class TagFeedModule { }
 
