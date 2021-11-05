@@ -8,7 +8,6 @@ export class AuthInterceptor implements HttpInterceptor {
 
   constructor(private persistanceService: PersistanceService) { }
 
-
   intercept(req: HttpRequest<any>, next: HttpHandler): Observable<HttpEvent<any>> {
     const token = this.persistanceService.get("accessToken");
 
